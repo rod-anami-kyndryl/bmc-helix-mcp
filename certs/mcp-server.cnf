@@ -1,0 +1,39 @@
+[ req ]
+# Prompt for distinguished name details (no interactive prompts)
+prompt = no
+# Default number of bits for the key
+default_bits = 2048
+# Default message digest (hash function)
+default_md = sha256
+# Section for the distinguished name (DN)
+distinguished_name = req_distinguished_name
+# Section for certificate extensions (including SAN)
+req_extensions = v3_req
+
+[ req_distinguished_name ]
+# Country Name (2 letter code)
+C = BR 
+# State or Province Name (full name)
+ST = Sao Paulo 
+# Locality Name (eg, city)
+L = Campinas 
+# Organization Name (eg, company)
+O = Kyndryl 
+# Organizational Unit Name (eg, section)
+OU = SRE 
+# Common Name (e.g. server FQDN or IP address)
+# Modern browsers ignore the CN if SAN is present
+CN = localhost
+
+[ v3_req ]
+# Extensions to add to a certificate request
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment
+# Reference the @alt_names section below for Subject Alternative Names
+subjectAltName = @alt_names
+
+[ alt_names ]
+# List of Subject Alternative Names (DNS names and IP addresses)
+DNS.1 = localhost
+DNS.2 = vaul-mcp-server.local
+IP.1 = 127.0.0.1

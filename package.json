@@ -1,0 +1,40 @@
+{
+  "name": "bmc-helix-mcp",
+  "version": "0.1.0",
+  "description": "BMC Helix MCP Server",
+  "type": "module",
+  "main": "dist/mcp-server.js",
+  "bin": {
+    "bmc-helix-mcp": "dist/mcp-server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/mcp-server.js",
+    "dev": "nodemon dist/mcp-server.js",
+    "watch": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "bmc",
+    "helix",
+    "itsm"
+  ],
+  "author": "Rod Anami <rod.anami@kyndryl.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.5.0",
+    "axios": "^1.7.9",
+    "axios-rate-limit": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^24.0.0",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.DS_Store
+certs/*.key
+certs/*.crt
+certs/*.csr
+certs/*.srl
+certs/*.pem
+output/
+data/*-table.json
+!data/service-mapping.json
