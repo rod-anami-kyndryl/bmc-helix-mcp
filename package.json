@@ -12,7 +12,8 @@
     "start": "node dist/mcp-server.js",
     "dev": "nodemon dist/mcp-server.js",
     "watch": "tsc --watch",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "npm run build && node --experimental-strip-types --test tests/mcp-server.test.ts"
   },
   "keywords": [
     "mcp",
