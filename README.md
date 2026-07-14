@@ -6,7 +6,6 @@ The **BMC Helix MCP Server** is a Model Context Protocol (MCP) server for SRE op
 
 - **Model Context Protocol (MCP) Support:** Built with `@modelcontextprotocol/sdk` to seamlessly integrate with LLMs and coding assistants.
 - **Form & CI Operations:** Wraps native BMC Helix ITSM REST API calls for fetching and paginating table data, CMDB CI querying by ID or Name, tasks, associations, and relationship checking.
-- **Advanced SRE Integrations:** Includes dedicated tools to process, enrich, SRE-classify, and correlate raw incident and alert listings to calculate Mean Time to Detect (MTTD).
 - **Express + HTTPS:** Supports standard HTTP as well as secure HTTPS with complete TLS certificate validation configurations.
 - **Node v24 and modern ES Module structure.**
 
@@ -16,8 +15,7 @@ The **BMC Helix MCP Server** is a Model Context Protocol (MCP) server for SRE op
 
 - `src/mcp-server.ts`: Fully-typed, rate-limited MCP Server application featuring express transport and tool mappings.
 - `certs/`: Holds local client and server CA keys, configurations, and scripts for secure TLS enablement.
-- `data/`: Local storage for configuration details (e.g., `service-mapping.json`) and enriched SRE databases.
-- `output/`: Folder for raw JSON extracts.
+- `tests/`: Integration tests using a mock Helix Server to validate server endpoints, authorization, and tool schemas.
 
 ---
 
@@ -25,15 +23,13 @@ The **BMC Helix MCP Server** is a Model Context Protocol (MCP) server for SRE op
 
 The server registers the following high-value tools:
 
-1. **`helix_get_table_data`**: Retrieve SRE records from any BMC Helix form (e.g., `HPD:IncidentInterface`, `CHG:Infrastructure Change`) with optional query filters and record limits.
+1. **`helix_get_table_data`**: Retrieve records from any BMC Helix form (e.g., `HPD:IncidentInterface`, `CHG:Infrastructure Change`) with optional query filters and record limits.
 2. **`helix_get_table_data_paginated`**: Automatically fetches and aggregates multi-page records from a form using offset-based pagination.
 3. **`helix_get_ci_by_id`**: Get a configuration item's attributes from `BMC.CORE:BMC_BaseElement` by its unique entry Request ID.
 4. **`helix_get_ci_by_name`**: Find CMDB records by name.
 5. **`helix_get_change_request_tasks`**: Retrieves children task lists from `TMS:Task` for a given Change ID (`CRQ...`).
 6. **`helix_get_problem_investigation_id`**: Finds the associated Problem ID for a given incident ticket.
 7. **`helix_get_change_configuration_items`**: Finds AST configuration items associated with a Change ID.
-8. **`helix_update_database`**: Processes external BMC extracts, enriches them with calculated ownership rules, mapping details, and template classifiers, and outputs the tables back to `/data/`.
-9. **`helix_correlate_incidents_alerts`**: Runs the MTTD measurement across the enriched datasets.
 
 ---
 
@@ -70,6 +66,57 @@ npm run build
 
 - **Production Mode:** `npm run start`
 - **Development Mode:** `npm run dev`
+
+---
+
+## Testing
+
+The project includes an integration test suite implemented with Node's native test runner (via `--test`). It runs against a mock BMC Helix server environment to validate:
+
+- Server initialization & health status checks.
+- API authentication and security authorization filters (e.g., verifying `MCP_AUTH_TOKEN` behavior).
+- Tool definitions and structural query capability.
+- Exact end-to-end flow execution for tool retrievals (`helix_get_table_data`, `helix_get_table_data_paginated`, CI queries, and Change/Problem relationships).
+
+To execute the test suite:
+
+```bash
+npm test
+```
+
+This command will compile the TypeScript codebase into the production output directory, launch the integrated mock server, spawn the MCP Server as an isolated subprocess, and execute all validation assertions.
+
+---
+
+## Contributing & Developer Certificate of Origin (DCO)
+
+We welcome contributions to this project! To contribute, please make sure your commits are signed off to certify compliance with the Developer Certificate of Origin (DCO).
+
+### Developer Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file; or
+
+(c) The contribution was provided directly to me by some other person who certified that he or she may submit it under those terms, and I have not modified it; and
+
+(d) I understand and agree that this project and the contribution are public and that a record of the contribution (including all personal information I submit with it, including my sign-off) is maintained indefinitely and may be redistributed consistent with this project or the open source license(s) involved.
+
+### How to Sign Off
+
+To certify your agreement with the DCO, add a `Signed-off-by` line to every commit message. You can do this automatically by signing off your commit with the `-s` or `--signoff` flag:
+
+```bash
+git commit -s -m "Your commit message"
+```
+
+This will append a line like the following to your commit message:
+
+```text
+Signed-off-by: Jane Doe <jane.doe@example.com>
+```
 
 ---
 
