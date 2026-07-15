@@ -1,6 +1,6 @@
 {
   "name": "bmc-helix-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A MCP Server for BMC Helix ITSM API.",
   "type": "module",
   "mcpName": "io.github.rod-anami-kyndryl/bmc-helix-mcp",

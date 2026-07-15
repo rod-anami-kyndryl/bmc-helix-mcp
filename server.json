@@ -6,12 +6,12 @@
     "url": "git@github.com:rod-anami-kyndryl/bmc-helix-mcp.git",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "bmc-helix-mcp",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "transport": {
         "type": "streamable-http",
         "url": "http://localhost:{MCP_PORT}/mcp"

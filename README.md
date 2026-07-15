@@ -2,6 +2,8 @@
 
 The **BMC Helix MCP Server** is a Model Context Protocol (MCP) server for SRE operations using BMC Helix ITSM REST APIs. It is implemented in TypeScript, powered by Express, and optionally configurable with HTTPS/TLS.
 
+For details on releases and updates, see the [Changelog](CHANGELOG.md).
+
 ## Project Features
 
 - **Model Context Protocol (MCP) Support:** Built with `@modelcontextprotocol/sdk` to seamlessly integrate with LLMs and coding assistants.
@@ -127,6 +129,10 @@ Signed-off-by: Jane Doe <jane.doe@example.com>
 ```
 
 ---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a history of changes.
 
 ## License
 
