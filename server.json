@@ -3,7 +3,7 @@
   "name": "io.github.rod-anami-kyndryl/bmc-helix-mcp",
   "description": "A MCP Server for BMC Helix ITSM API.",
   "repository": {
-    "url": "git@github.com:rod-anami-kyndryl/bmc-helix-mcp",
+    "url": "git@github.com:rod-anami-kyndryl/bmc-helix-mcp.git",
     "source": "github"
   },
   "version": "0.1.0",
