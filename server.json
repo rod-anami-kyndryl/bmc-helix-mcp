@@ -1,0 +1,109 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rod-anami-kyndryl/bmc-helix-mcp",
+  "description": "A MCP Server for BMC Helix ITSM API.",
+  "repository": {
+    "url": "git@github.com:rod-anami-kyndryl/bmc-helix-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "bmc-helix-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "streamable-http",
+        "url": "http://localhost:{MCP_PORT}/mcp"
+      },
+      "environmentVariables": [
+        {
+          "name": "HELIX_API_URL",
+          "description": "BMC Helix Entry level REST API URL endpoint.",
+          "isRequired": true,
+          "format": "string",
+          "default": "https://your-helix-instance.onbmc.com/api/arsys/v1/entry/",
+          "placeholder": "https://your-helix-instance.onbmc.com/api/arsys/v1/entry/"
+        },
+        {
+          "name": "HELIX_TOKEN_URL",
+          "description": "BMC Helix JWT Login endpoint URL.",
+          "isRequired": true,
+          "format": "string",
+          "default": "https://your-helix-instance.onbmc.com/api/jwt/login",
+          "placeholder": "https://your-helix-instance.onbmc.com/api/jwt/login"
+        },
+        {
+          "name": "HELIX_USERID",
+          "description": "BMC Helix API Username/UserID.",
+          "isRequired": true,
+          "format": "string",
+          "placeholder": "your_username"
+        },
+        {
+          "name": "HELIX_PASSWORD",
+          "description": "BMC Helix API User Password.",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "placeholder": "your_password"
+        },
+        {
+          "name": "HELIX_CERT_PATH",
+          "description": "Path to the retrieved BMC Helix TLS certificate chain.",
+          "isRequired": false,
+          "format": "filepath",
+          "default": "./certs/helix-certs.pem",
+          "placeholder": "./certs/helix-certs.pem"
+        },
+        {
+          "name": "MCP_PORT",
+          "description": "The port number on which the MCP Server should run.",
+          "isRequired": false,
+          "format": "number",
+          "default": "4044",
+          "placeholder": "4044"
+        },
+        {
+          "name": "MCP_AUTH_TOKEN",
+          "description": "Optional Bearer token to secure the MCP Server communication.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "placeholder": "your_mcp_secret_token"
+        },
+        {
+          "name": "MCP_TLS_ENABLED",
+          "description": "Set to true to run the MCP Server with secure TLS (HTTPS).",
+          "isRequired": false,
+          "format": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "MCP_TLS_KEY",
+          "description": "Path to the TLS private key file.",
+          "isRequired": false,
+          "format": "filepath",
+          "default": "./certs/mcp-server.key",
+          "placeholder": "./certs/mcp-server.key"
+        },
+        {
+          "name": "MCP_TLS_CERT",
+          "description": "Path to the TLS certificate file.",
+          "isRequired": false,
+          "format": "filepath",
+          "default": "./certs/mcp-server.crt",
+          "placeholder": "./certs/mcp-server.crt"
+        },
+        {
+          "name": "MCP_TLS_CA",
+          "description": "Path to the TLS Certificate Authority (CA) file.",
+          "isRequired": false,
+          "format": "filepath",
+          "default": "./certs/ca.crt",
+          "placeholder": "./certs/ca.crt"
+        }
+      ]
+    }
+  ]
+}
