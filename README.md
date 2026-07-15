@@ -50,6 +50,20 @@ cp .env.example .env
 - `MCP_AUTH_TOKEN`: Optional API Authorization Bearer token to secure the MCP endpoint from external entities.
 - `MCP_TLS_ENABLED`: Set to `true` to enable TLS on the express listener.
 
+1. Retrieve TLS Certificates from BMC Helix:
+
+If your BMC Helix instance uses self-signed, internal, or custom CA certificates, you can automatically retrieve the certificate chain using the helper script:
+
+```bash
+./certs/helix-certs.sh https://your-helix-instance.onbmc.com
+```
+
+This retrieves the website's certificate chain via `openssl` and saves it to `certs/helix-certs.pem`. Then, reference it in your `.env` configuration:
+
+```env
+HELIX_CERT_PATH=./certs/helix-certs.pem
+```
+
 1. Install dependencies:
 
 ```bash
