@@ -17,7 +17,7 @@ const HelixApiUrl   = process.env.HELIX_API_URL   || 'https://your-helix-instanc
 const HelixTokenUrl = process.env.HELIX_TOKEN_URL  || 'https://your-helix-instance.onbmc.com/api/jwt/login';
 const HelixUserId   = process.env.HELIX_USERID     || 'your_username';
 const HelixPassword = process.env.HELIX_PASSWORD   || 'your_password';
-const HelixCertPath = process.env.HELIX_CERT_PATH   || './certs/cert.pem';
+const HelixCertPath = process.env.HELIX_CERT_PATH   || './certs/helix-certs.pem';
 
 // Standard BMC Helix form names
 const HELIX_FORMS: Record<string, string> = {
@@ -41,7 +41,7 @@ let httpsAgent: https.Agent;
 try {
   if (fs.existsSync(HelixCertPath)) {
     httpsAgent = new https.Agent({
-      rejectUnauthorized: false, // Disables strict SSL verification as per SRE parser behavior
+      rejectUnauthorized: false, // Disables strict SSL verification
       ca: fs.readFileSync(HelixCertPath),
       cert: fs.readFileSync(HelixCertPath),
     });
